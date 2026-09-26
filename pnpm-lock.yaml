@@ -56,9 +56,6 @@ importers:
       react-router:
         specifier: ^8.4.0
         version: 8.4.0(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
-      react-schedule-meeting:
-        specifier: ^5.0.0
-        version: 5.0.0(@types/react@19.3.0)(csstype@3.2.3)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
       shadcn:
         specifier: ^4.21.0
         version: 4.21.0(typescript@6.0.3)
@@ -1000,9 +997,6 @@ packages:
       oxc-transform-react:
         optional: true
 
-  '@wojtekmaj/date-utils@2.0.2':
-    resolution: {integrity: sha512-Do66mSlSNifFFuo3l9gNKfRMSFi26CRuQMsDJuuKO/ekrDWuTTtE4ZQxoFCUOG+NgxnpSeBq/k5TY8ZseEzLpA==}
-
   accepts@2.0.0:
     resolution: {integrity: sha512-5cvg6CtKwfgdmVqY1WIiXKc3Q1bkRqGLi+2W/6ao+6Y7gu/RCwRuAhGEzh5B4KlszSuTLgZYuqFqo5bImjNKng==}
     engines: {node: '>= 0.6'}
@@ -1165,24 +1159,8 @@ packages:
     resolution: {integrity: sha512-RRECPsj7iu/xb5oKYcsFHSppFNnsj/52OVTRKb4zP5onXwVF3zVmmToNcOfGC+CRDpfK/U584fMg38ZHCaElKQ==}
     engines: {node: '>=7.0.0'}
 
-  color-convert@3.1.3:
-    resolution: {integrity: sha512-fasDH2ont2GqF5HpyO4w0+BcewlhHEZOFn9c1ckZdHpJ56Qb7MHhH/IcJZbBGgvdtwdwNbLvxiBEdg336iA9Sg==}
-    engines: {node: '>=14.6'}
-
   color-name@1.1.4:
     resolution: {integrity: sha512-dOy+3AuW3a2wNbZHIuMZpTcgjGuLU/uBL/ubcZF9OXbDo8ff4O8yVp5Bf0efS8uEoYo5q4Fx7dY9OgQGXgAsQA==}
-
-  color-name@2.1.1:
-    resolution: {integrity: sha512-p2FdgwVx1a9yWBHP2wI0VgShkDpgN4kZISkxdNipGBJWpa5G6b04OINlVWCyJj0JmfvcPrgqt95E9k8yvaOJFg==}
-    engines: {node: '>=12.20'}
-
-  color-string@2.1.4:
-    resolution: {integrity: sha512-Bb6Cq8oq0IjDOe8wJmi4JeNn763Xs9cfrBcaylK1tPypWzyoy2G3l90v9k64kjphl/ZJjPIShFztenRomi8WTg==}
-    engines: {node: '>=18'}
-
-  color@5.0.3:
-    resolution: {integrity: sha512-ezmVcLR3xAVp8kYOm4GS45ZLLgIE6SPAFoduLr6hTDajwb3KZ2F46gulK3XpcwRFb5KKGCSezCBAY4Dw4HsyXA==}
-    engines: {node: '>=18'}
 
   commander@11.1.0:
     resolution: {integrity: sha512-yPVavfyCcRhmorC7rWlkHn15b4wDVgVmBA7kV4QVBsF7kv/9TKJAbAXVTxvTnwP8HHKjRCJDClKbciiYS7p0DQ==}
@@ -1602,9 +1580,6 @@ packages:
     resolution: {integrity: sha512-kVCxPF3vQM/N0B1PmoqVUqgHP+EeVjmZSQn+1oCRPxd2P21P2F19lIgbR3HBosbB1PUhOAoctJnfEn2GbN2eZA==}
     engines: {node: '>=18'}
 
-  get-user-locale@3.0.0:
-    resolution: {integrity: sha512-iJfHSmdYV39UUBw7Jq6GJzeJxUr4U+S03qdhVuDsR9gCEnfbqLy9gYDJFBJQL1riqolFUKQvx36mEkp2iGgJ3g==}
-
   glob-parent@5.1.2:
     resolution: {integrity: sha512-AOIgSQCepiJYwP3ARnGx+5VnTu2HBYdzbGP45eLw1vr3zB3vZLeyed1sC9hnbcOc9/SrMyM5RPQrkGz4aS9Zow==}
     engines: {node: '>= 6'}
@@ -1616,11 +1591,6 @@ packages:
   globals@17.12.0:
     resolution: {integrity: sha512-cezEd/DTyyht9cvSSURyygXPfy04GtWO/5e6ZPvH7fCtjKz9PYOmuawphw1Ctd1f6C+5JypXfGD7ahNMXvevBA==}
     engines: {node: '>=18'}
-
-  goober@2.1.19:
-    resolution: {integrity: sha512-U7veizMqxyKlM58+Z5j2ngJBH/r9siDmxpvNxSw0PylF6WQvrASJEZrxh1hidRBJc2jqoBVSyOban5u8m+6Rxg==}
-    peerDependencies:
-      csstype: ^3.0.10
 
   gopd@1.2.0:
     resolution: {integrity: sha512-ZUKRh6/kUFoAiTAtTYPZJ3hw9wNxx+BIBOijnlG9PnrJsCcSjs1wyyD6vJpaYtgnzDrKYRSqf3OO6Rfa93xsRg==}
@@ -2029,10 +1999,6 @@ packages:
     resolution: {integrity: sha512-i24m8rpwhmPIS4zscNzK6MSEhk0DUWa/8iYQWxhffV8jkI4Phvs3F+quL5xvS0gdQR0FyTCMMH33Y78dDTzzIw==}
     engines: {node: '>=18'}
 
-  loose-envify@1.4.0:
-    resolution: {integrity: sha512-lyuxPGr/Wfhrlem2CL/UcnUc1zcqKAImBDzukY7Y5F/yQiNdko6+fRLevlw1HgMySw7f611UIY408EtxRSoK3Q==}
-    hasBin: true
-
   lru-cache@5.1.1:
     resolution: {integrity: sha512-KpNARQA3Iwv+jTA0utUVVbrh+Jlrr1Fv0e56GGzAFOXN7dk/FviaDW8LHmK52DlcH4WP2n6gI8vN1aesBFgo9w==}
 
@@ -2051,10 +2017,6 @@ packages:
   media-typer@1.1.1:
     resolution: {integrity: sha512-yz3xRaG20c6/BOzvYoDaGtPmGscs7YivItZEEqe6GbwNfHuxu9YNmvnEkMzKldAGY4/80pRcQRZSEnhquk9XuQ==}
     engines: {node: '>= 0.8'}
-
-  memoize@10.2.0:
-    resolution: {integrity: sha512-DeC6b7QBrZsRs3Y02A6A7lQyzFbsQbqgjI6UW0GigGWV+u1s25TycMr0XHZE4cJce7rY/vyw2ctMQqfDkIhUEA==}
-    engines: {node: '>=18'}
 
   merge-descriptors@2.0.0:
     resolution: {integrity: sha512-Snk314V5ayFLhp3fkUREub6WtjBfPdCPY1Ln8/8munuLuiYhsABgBVWsozAG+MWMbVEvcdcpbi9R7ww22l9Q3g==}
@@ -2332,16 +2294,6 @@ packages:
     resolution: {integrity: sha512-K5zQjDllxWkf7Z5xJdV0/B0WTNqx6vxG70zJE4N0kBs4LovmEYWJzQGxC9bS9RAKu3bgM40lrd5zoLJ12MQ5BA==}
     engines: {node: '>= 0.10'}
 
-  react-calendar@6.0.1:
-    resolution: {integrity: sha512-b8E61W7qk/He9XEbtbQBjnALPuGmxeglsotgZyAShqN1vHMzXWjl4g7WI5tRF93RE4Wbo0c0BKN3vTQhrBojpg==}
-    peerDependencies:
-      '@types/react': ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
-      react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
-      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
-    peerDependenciesMeta:
-      '@types/react':
-        optional: true
-
   react-dom@19.3.0:
     resolution: {integrity: sha512-JDk8dgif51OjFoDE70+OT9ICyYr+69HlmihNwp1+Nsfbna3t5sIiCa9ZJktDmQ4/1b/rn26hIAR2uYXDMr5r0Q==}
     peerDependencies:
@@ -2361,12 +2313,6 @@ packages:
     peerDependenciesMeta:
       react-dom:
         optional: true
-
-  react-schedule-meeting@5.0.0:
-    resolution: {integrity: sha512-1AaDGnrNN38cmkh08KYBPHCFugk9rlY2TQIneBsw6ZXstelhIkFmORguTO1dTE/ZFhvCkfSlKOCdC6v/ggE/Iw==}
-    peerDependencies:
-      react: ^18
-      react-dom: ^18
 
   react@19.3.0:
     resolution: {integrity: sha512-E8LUcbtBWt20bbl2YoHfx4ZDBdxVTfOKtCZn9cDSJ4l6/nuoApcpIBcj47t2wZoVX8g2ZHuMHbiShgCR1T5Sog==}
@@ -2723,9 +2669,6 @@ packages:
         optional: true
       yaml:
         optional: true
-
-  warning@4.0.3:
-    resolution: {integrity: sha512-rpJyN222KWIvHJ/F53XSZv0Zl/accqHR8et1kpaMTD/fLCRxtV8iX8czMzY7sVZupTI3zcUTg8eycS2kNF9l6w==}
 
   which@2.0.2:
     resolution: {integrity: sha512-BLI3Tl1TW3Pvl70l3yq3Y64i+awpwXqsGBYWkkqMtnbXgrMD+yj7rhW0kuEDxzJaYXGjEW5ogapKNMEKNMjibA==}
@@ -3624,8 +3567,6 @@ snapshots:
       '@rolldown/plugin-babel': 0.2.4(@babel/core@7.29.7)(@babel/runtime@7.29.7)(rolldown@1.2.11)(vite@8.3.1(@types/node@24.13.6)(jiti@2.7.0))
       babel-plugin-react-compiler: 1.0.0
 
-  '@wojtekmaj/date-utils@2.0.2': {}
-
   accepts@2.0.0:
     dependencies:
       mime-types: 3.0.2
@@ -3775,22 +3716,7 @@ snapshots:
     dependencies:
       color-name: 1.1.4
 
-  color-convert@3.1.3:
-    dependencies:
-      color-name: 2.1.1
-
   color-name@1.1.4: {}
-
-  color-name@2.1.1: {}
-
-  color-string@2.1.4:
-    dependencies:
-      color-name: 2.1.1
-
-  color@5.0.3:
-    dependencies:
-      color-convert: 3.1.3
-      color-string: 2.1.4
 
   commander@11.1.0: {}
 
@@ -4229,10 +4155,6 @@ snapshots:
       '@sec-ant/readable-stream': 0.4.1
       is-stream: 4.0.1
 
-  get-user-locale@3.0.0:
-    dependencies:
-      memoize: 10.2.0
-
   glob-parent@5.1.2:
     dependencies:
       is-glob: 4.0.3
@@ -4242,10 +4164,6 @@ snapshots:
       is-glob: 4.0.3
 
   globals@17.12.0: {}
-
-  goober@2.1.19(csstype@3.2.3):
-    dependencies:
-      csstype: 3.2.3
 
   gopd@1.2.0: {}
 
@@ -4532,10 +4450,6 @@ snapshots:
       chalk: 5.6.2
       is-unicode-supported: 1.3.0
 
-  loose-envify@1.4.0:
-    dependencies:
-      js-tokens: 4.0.0
-
   lru-cache@5.1.1:
     dependencies:
       yallist: 3.1.1
@@ -4551,10 +4465,6 @@ snapshots:
   math-intrinsics@1.1.0: {}
 
   media-typer@1.1.1: {}
-
-  memoize@10.2.0:
-    dependencies:
-      mimic-function: 5.0.1
 
   merge-descriptors@2.0.0: {}
 
@@ -4826,17 +4736,6 @@ snapshots:
       iconv-lite: 0.7.3
       unpipe: 1.0.0
 
-  react-calendar@6.0.1(@types/react@19.3.0)(react-dom@19.3.0(react@19.3.0))(react@19.3.0):
-    dependencies:
-      '@wojtekmaj/date-utils': 2.0.2
-      clsx: 2.1.1
-      get-user-locale: 3.0.0
-      react: 19.3.0
-      react-dom: 19.3.0(react@19.3.0)
-      warning: 4.0.3
-    optionalDependencies:
-      '@types/react': 19.3.0
-
   react-dom@19.3.0(react@19.3.0):
     dependencies:
       react: 19.3.0
@@ -4853,18 +4752,6 @@ snapshots:
       react: 19.3.0
     optionalDependencies:
       react-dom: 19.3.0(react@19.3.0)
-
-  react-schedule-meeting@5.0.0(@types/react@19.3.0)(csstype@3.2.3)(react-dom@19.3.0(react@19.3.0))(react@19.3.0):
-    dependencies:
-      color: 5.0.3
-      date-fns: 4.4.0
-      goober: 2.1.19(csstype@3.2.3)
-      react: 19.3.0
-      react-calendar: 6.0.1(@types/react@19.3.0)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
-      react-dom: 19.3.0(react@19.3.0)
-    transitivePeerDependencies:
-      - '@types/react'
-      - csstype
 
   react@19.3.0: {}
 
@@ -5219,10 +5106,6 @@ snapshots:
       '@types/node': 24.13.6
       fsevents: 2.3.3
       jiti: 2.7.0
-
-  warning@4.0.3:
-    dependencies:
-      loose-envify: 1.4.0
 
   which@2.0.2:
     dependencies:

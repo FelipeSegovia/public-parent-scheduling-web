@@ -41,6 +41,24 @@ No agregar en esta superficie:
 - msw - data mock local
 - react-schedule-meeting - ui para visualizar calendario y agendamiento
 
+## Paleta de colores
+
+Fuente: `src/index.css` (`:root`). Usar estos tokens (`bg-background`, `text-foreground`, `bg-primary`, etc.). No inventar hex sueltos.
+
+| Token | Valor | Uso |
+| --- | --- | --- |
+| `background` / `sidebar` | `#fff2eb` | Fondo de página |
+| `foreground` | `#4a2430` | Texto principal |
+| `card` / `popover` / `primary-foreground` | `#fffbfa` | Superficies claras y texto sobre primario |
+| `primary` / `ring` | `#8e3048` | Acciones, foco y marca |
+| `secondary` / `brand-soft` | `#ffebef` | Fondos suaves de marca |
+| `muted` / `accent` | `#fee2e1` | Fondos atenuados y acento |
+| `muted-foreground` | `#7d5560` | Texto secundario |
+| `border` / `input` / `brand-selected` | `#fed8d2` | Bordes, inputs y selección |
+| `destructive` | `oklch(0.577 0.245 27.325)` | Errores y acciones destructivas |
+
+Tipografías: `DM Sans` (texto) y `Newsreader` (títulos). Radio base: `0.875rem`.
+
 ## Metodología: Spec-Driven Development (SDD)
 
 Este proyecto sigue SDD para features que tocan más de un archivo o capa
