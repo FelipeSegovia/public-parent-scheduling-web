@@ -29,6 +29,8 @@ export type Session = {
   status: SessionStatus
   confirmToken: string
   cancelToken: string
+  /** Motivo o área en la que el apoderado pide apoyo (opcional). */
+  helpRequest?: string
 }
 
 export type SlotView = {
@@ -49,6 +51,7 @@ export type CreateBookingInput = {
   phone: string
   childName: string
   childAge: number
+  helpRequest?: string
 }
 
 export type BookingResult = {

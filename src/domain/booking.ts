@@ -16,12 +16,87 @@ const SATURDAY_TIMES = ['09:00', '10:00', '11:00'] as const
 
 const ACTIVE_STATUSES = new Set(['pendiente', 'confirmada'])
 
+export const HELP_REQUEST_MAX_LENGTH = 500
+
 export function normalizeName(name: string): string {
   return name.trim().replace(/\s+/g, ' ').toLowerCase()
 }
 
+export function normalizeHelpRequest(value: string | undefined): string | undefined {
+  if (value == null) return undefined
+  const trimmed = value.trim().replace(/\s+/g, ' ')
+  return trimmed.length > 0 ? trimmed : undefined
+}
+
 export function isValidChildAge(age: number): boolean {
   return Number.isInteger(age) && age >= 3 && age <= 13
+}
+
+export const REQUIRED_BOOKING_FIELDS_MESSAGE =
+  'Completa todos los campos obligatorios.'
+
+export const REQUIRED_FIELD_MESSAGE = 'Este campo es obligatorio.'
+
+export type BookingRequiredFieldKey =
+  | 'guardianName'
+  | 'email'
+  | 'phone'
+  | 'childName'
+  | 'childAge'
+
+export function getRequiredBookingFieldErrors(fields: {
+  guardianName: string
+  email: string
+  phone: string
+  childName: string
+  childAge: string
+}): Partial<Record<BookingRequiredFieldKey, string>> {
+  const errors: Partial<Record<BookingRequiredFieldKey, string>> = {}
+
+  if (!fields.guardianName.trim()) {
+    errors.guardianName = REQUIRED_FIELD_MESSAGE
+  }
+  if (!fields.email.trim()) {
+    errors.email = REQUIRED_FIELD_MESSAGE
+  }
+  if (!fields.phone.trim()) {
+    errors.phone = REQUIRED_FIELD_MESSAGE
+  }
+  if (!fields.childName.trim()) {
+    errors.childName = REQUIRED_FIELD_MESSAGE
+  }
+  if (!fields.childAge.trim()) {
+    errors.childAge = REQUIRED_FIELD_MESSAGE
+  } else {
+    const age = Number(fields.childAge)
+    if (!isValidChildAge(age)) {
+      errors.childAge = 'La edad del niño debe estar entre 3 y 13 años.'
+    }
+  }
+
+  return errors
+}
+
+/** Obligatorios en reserva; `helpRequest` queda fuera a propósito. */
+export function hasAllRequiredBookingFields(fields: {
+  guardianName: string
+  email: string
+  phone: string
+  childName: string
+  childAge: string | number
+}): boolean {
+  if (
+    !fields.guardianName.trim() ||
+    !fields.email.trim() ||
+    !fields.phone.trim() ||
+    !fields.childName.trim()
+  ) {
+    return false
+  }
+  if (typeof fields.childAge === 'string') {
+    return fields.childAge.trim() !== ''
+  }
+  return Number.isFinite(fields.childAge)
 }
 
 /** Local Chile calendar date as YYYY-MM-DD */

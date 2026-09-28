@@ -1,8 +1,12 @@
 import { format } from 'date-fns'
 import {
+  HELP_REQUEST_MAX_LENGTH,
+  hasAllRequiredBookingFields,
   initialSessionStatus,
   isValidChildAge,
+  normalizeHelpRequest,
   normalizeName,
+  REQUIRED_BOOKING_FIELDS_MESSAGE,
   slotStartsAtIso,
   weekMondayYmd,
   canCancelSession,
@@ -126,18 +130,14 @@ export function createBooking(input: CreateBookingInput): BookingResult {
     })
   }
 
-  const email = input.email.trim().toLowerCase()
-  if (
-    !email ||
-    !input.guardianName.trim() ||
-    !input.phone.trim() ||
-    !input.childName.trim()
-  ) {
-    throw Object.assign(new Error('Completa todos los campos.'), {
+  if (!hasAllRequiredBookingFields(input)) {
+    throw Object.assign(new Error(REQUIRED_BOOKING_FIELDS_MESSAGE), {
       status: 400,
       code: 'MISSING_FIELDS',
     })
   }
+
+  const email = input.email.trim().toLowerCase()
 
   if (isPastSlot(input.startsAt)) {
     throw Object.assign(new Error('Ese horario ya pasó.'), {
@@ -156,6 +156,16 @@ export function createBooking(input: CreateBookingInput): BookingResult {
       status: 409,
       code: 'SLOT_TAKEN',
     })
+  }
+
+  const helpRequest = normalizeHelpRequest(input.helpRequest)
+  if (helpRequest && helpRequest.length > HELP_REQUEST_MAX_LENGTH) {
+    throw Object.assign(
+      new Error(
+        `El texto de ayuda no puede superar ${HELP_REQUEST_MAX_LENGTH} caracteres.`,
+      ),
+      { status: 400, code: 'HELP_REQUEST_TOO_LONG' },
+    )
   }
 
   let guardian = db.guardians.find((g) => g.email === email)
@@ -196,6 +206,7 @@ export function createBooking(input: CreateBookingInput): BookingResult {
     status: initialSessionStatus(input.startsAt),
     confirmToken: token(),
     cancelToken: token(),
+    ...(helpRequest ? { helpRequest } : {}),
   }
   db.sessions.push(session)
 

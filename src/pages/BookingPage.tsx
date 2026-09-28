@@ -105,6 +105,7 @@ export function BookingPage() {
         phone: values.phone,
         childName: values.childName,
         childAge: Number(values.childAge),
+        helpRequest: values.helpRequest.trim() || undefined,
       })
       navigate(`/reserva/${result.session.id}`)
     } finally {

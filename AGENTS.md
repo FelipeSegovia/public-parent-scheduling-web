@@ -55,7 +55,7 @@ Fuente: `src/index.css` (`:root`). Usar estos tokens (`bg-background`, `text-for
 | `muted` / `accent` | `#fee2e1` | Fondos atenuados y acento |
 | `muted-foreground` | `#7d5560` | Texto secundario |
 | `border` / `input` / `brand-selected` | `#fed8d2` | Bordes, inputs y selección |
-| `destructive` | `oklch(0.577 0.245 27.325)` | Errores y acciones destructivas |
+| `destructive` | `#7a2436` | Errores y acciones destructivas |
 
 Tipografías: `DM Sans` (texto) y `Newsreader` (títulos). Radio base: `0.875rem`.
 
