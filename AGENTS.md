@@ -2,12 +2,12 @@
 
 Contexto para agentes que trabajan en la **superficie pública** del MVP: reserva y gestión de citas del apoderado.
 
-Fuente canónica: [docs/mvp/REQUERIMIENTOS_FUNCIONALES.md](../docs/mvp/REQUERIMIENTOS_FUNCIONALES.md) y [docs/mvp/FUERA_DEL_MVP.md](../docs/mvp/FUERA_DEL_MVP.md). Si hay conflicto, prevalecen esos documentos. El contexto de la educadora está en [AGENTS_PRIVATE.md](AGENTS_PRIVATE.md).
+Fuente canónica: [docs/mvp/REQUERIMIENTOS_FUNCIONALES.md](../docs/mvp/REQUERIMIENTOS_FUNCIONALES.md) y [docs/mvp/FUERA_DEL_MVP.md](../docs/mvp/FUERA_DEL_MVP.md). Si hay conflicto, prevalecen esos documentos. El contexto de la educadora está en [AGENTS_PRIVATE.md](../AGENTS_PRIVATE.md).
 
 ## Quién es el usuario
 
 - Apoderado de un niño entre 3 y 13 años.
-- Sin cuenta. No hay login, registro ni panel de “mis citas”.
+- Puede reservar sin cuenta. La cuenta (correo y clave) es opcional y solo completa el formulario. No hay panel de “mis citas”. Spec: [.specs/001-cuenta-apoderado/spec.md](.specs/001-cuenta-apoderado/spec.md).
 - Zona horaria: `America/Santiago`.
 
 ## Qué puede hacer esta superficie
@@ -17,6 +17,7 @@ Fuente canónica: [docs/mvp/REQUERIMIENTOS_FUNCIONALES.md](../docs/mvp/REQUERIMI
 3. Si el email ya existe, asociar la reserva a ese apoderado. Si el nombre del niño coincide (sin distinguir mayúsculas ni espacios de más), reutilizar el niño; si no, crear otro.
 4. Al reservar, bloquear el cupo. Si el plazo de confirmación ya venció (incluye cita del mismo día), la sesión nace `confirmada`. Si no, nace `pendiente` y el correo incluye enlaces Confirmo y No puedo.
 5. Confirmar o cancelar solo con los enlaces del correo. Puede cancelar hasta la hora de la cita. No puede reprogramar: cancela y, si quiere, reserva otro cupo libre.
+6. Cuenta opcional: registro como opt-in al reservar («Crear cuenta con estos datos» + clave), inicio de sesión en un diálogo del encabezado y clave olvidada por enlace al correo. Con sesión se completan nombre, correo, teléfono y niño; la nota de ayuda no. Una reserva sin sesión con un correo que tiene cuenta no modifica ese perfil.
 
 ## Correos al apoderado
 
@@ -29,7 +30,8 @@ Cada correo habla solo de la cita de esa familia:
 
 No agregar en esta superficie:
 
-- Login, cuenta de apoderado o fichas editables por el apoderado.
+- Cuenta obligatoria, panel de “mis citas”, páginas propias de registro o login, o fichas editables fuera del formulario.
+- Confirmar, cancelar o reprogramar desde la cuenta.
 - Series semanales, plantilla de horario, bloqueo de cupos o reprogramación.
 - WhatsApp automático, precio, pago (WebPay/transferencia/boleta) o duración distinta de 1 hora.
 - Datos o estados de otras familias.
@@ -74,7 +76,7 @@ Cada feature vive en `.specs/<numero>-<nombre-corto>/` con:
 - `tasks.md` — lista numerada y ordenada de tareas ejecutables
 - `status.md` — estado actual y qué sigue (para retomar entre sesiones)
 
-Plantilla base: `specs/_templates/` .
+Plantilla base: `.specs/_templates/`.
 
 ### Reglas de flujo (IMPORTANTE)
 
@@ -98,10 +100,4 @@ las de la raíz: `001-`, `002-`, etc. Antes de crear una nueva, revisa
 ## Comandos de desarrollo
 
 
-`pnpm dev` ejecución local.
-
-When starting the dev server, use background mode with msw:
-
-```
-astro dev --background
-```
+`pnpm dev` ejecución local (Vite). En desarrollo, MSW arranca antes de renderizar y mockea `/api/*`; ejecútalo en segundo plano si necesitas seguir trabajando mientras corre.

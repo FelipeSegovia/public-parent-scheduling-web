@@ -1,41 +1,44 @@
-import { useEffect, useState } from 'react'
-import { Link, useParams } from 'react-router'
+import { Link, useLocation, useParams } from 'react-router'
+import { useQuery } from '@tanstack/react-query'
+import { HiOutlineCheckCircle } from 'react-icons/hi2'
 import { fetchBooking } from '@/api/client'
+import { queryKeys } from '@/api/query-keys'
 import { formatSessionSummary } from '@/domain/booking'
-import type { BookingResult } from '@/domain/types'
 import { SiteHeader } from '@/components/SiteHeader'
 import { buttonVariants } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 
 export function BookingResultPage() {
   const { id } = useParams<{ id: string }>()
-  const [data, setData] = useState<BookingResult | null>(null)
-  const [error, setError] = useState<string | null>(null)
+  const accountCreated =
+    (useLocation().state as { accountCreated?: boolean } | null)?.accountCreated ===
+    true
 
-  useEffect(() => {
-    if (!id) return
-    void fetchBooking(id)
-      .then(setData)
-      .catch((err: unknown) =>
-        setError(err instanceof Error ? err.message : 'No encontrada'),
-      )
-  }, [id])
+  const bookingQuery = useQuery({
+    queryKey: queryKeys.booking(id ?? ''),
+    queryFn: () => fetchBooking(id!),
+    enabled: Boolean(id),
+  })
+
+  const data = bookingQuery.data ?? null
+  const error = bookingQuery.isError
+    ? bookingQuery.error instanceof Error
+      ? bookingQuery.error.message
+      : 'No encontrada'
+    : null
 
   return (
     <div className="mx-auto max-w-lg px-4 pb-16 sm:px-6">
       <SiteHeader />
 
-      <div className="mt-8 rounded-3xl border border-border bg-card p-6 shadow-sm sm:p-8">
+      <main className="mt-8 rounded-xl bg-card p-6 shadow-[0_12px_40px_-24px_rgb(74_36_48/0.35)] sm:p-8">
         {error ? (
           <p className="text-destructive">{error}</p>
         ) : !data ? (
           <p className="text-muted-foreground">Cargando tu reserva…</p>
         ) : (
           <div className="space-y-5 text-left">
-            <p className="text-xs font-semibold tracking-[0.12em] text-muted-foreground uppercase">
-              Reserva lista
-            </p>
-            <h1 className="font-heading text-3xl text-foreground">
+            <h1 className="font-heading text-3xl text-balance text-foreground">
               {data.session.status === 'confirmada'
                 ? 'Tu sesión quedó confirmada'
                 : 'Tu sesión quedó pendiente de confirmación'}
@@ -47,15 +50,26 @@ export function BookingResultPage() {
             <p className="text-sm text-muted-foreground">
               Enviamos los detalles a <strong>{data.guardian.email}</strong>.
               {data.session.status === 'pendiente'
-                ? ' Usa los enlaces de abajo para confirmar o cancelar (en local simulan el correo).'
-                : ' Como faltaba menos de 24 horas, la cita ya está confirmada.'}
+                ? ' Mientras el envío de correos no esté activo, usa estos enlaces para confirmar o cancelar.'
+                : ' Como la cita está muy próxima, ya quedó confirmada.'}
             </p>
+
+            {accountCreated ? (
+              <p className="flex items-start gap-2.5 rounded-xl bg-brand-soft px-4 py-3 text-sm text-foreground">
+                <HiOutlineCheckCircle
+                  className="mt-0.5 size-4 shrink-0 text-primary"
+                  aria-hidden
+                />
+                Creamos tu cuenta. La próxima vez inicia sesión y el formulario
+                aparecerá con tus datos.
+              </p>
+            ) : null}
 
             {data.session.status === 'pendiente' ? (
               <div className="flex flex-col gap-2 sm:flex-row">
                 <Link
                   to={`/sesion/${data.session.confirmToken}/confirmar`}
-                  className={cn(buttonVariants({ size: 'lg' }), 'rounded-xl')}
+                  className={cn(buttonVariants({ size: 'lg' }), 'h-11 rounded-xl px-5 text-base')}
                 >
                   Confirmo
                 </Link>
@@ -63,7 +77,7 @@ export function BookingResultPage() {
                   to={`/sesion/${data.session.cancelToken}/cancelar`}
                   className={cn(
                     buttonVariants({ variant: 'outline', size: 'lg' }),
-                    'rounded-xl',
+                    'h-11 rounded-xl px-5 text-base',
                   )}
                 >
                   No puedo
@@ -79,7 +93,7 @@ export function BookingResultPage() {
             </Link>
           </div>
         )}
-      </div>
+      </main>
     </div>
   )
 }

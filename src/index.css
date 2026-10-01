@@ -103,6 +103,22 @@
 
   body {
     @apply m-0 min-h-svh bg-background text-foreground antialiased;
+    caret-color: var(--primary);
+  }
+
+  ::selection {
+    background-color: var(--brand-selected);
+    color: var(--foreground);
+  }
+
+  a:focus-visible,
+  button:focus-visible,
+  input[type="checkbox"]:focus-visible {
+    @apply outline-2 outline-offset-2 outline-ring;
+  }
+
+  input[type="number"] {
+    font-variant-numeric: tabular-nums;
   }
 
   #root {

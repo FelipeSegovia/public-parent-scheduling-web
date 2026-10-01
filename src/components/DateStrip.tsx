@@ -13,6 +13,7 @@ type Props = {
   days: DayOption[]
   selectedDate: string | null
   onSelectDate: (date: string) => void
+  canGoPrev: boolean
   onPrevWeek: () => void
   onNextWeek: () => void
 }
@@ -22,6 +23,7 @@ export function DateStrip({
   days,
   selectedDate,
   onSelectDate,
+  canGoPrev,
   onPrevWeek,
   onNextWeek,
 }: Props) {
@@ -33,6 +35,7 @@ export function DateStrip({
           variant="outline"
           size="icon"
           aria-label="Semana anterior"
+          disabled={!canGoPrev}
           onClick={onPrevWeek}
           className="rounded-full"
         >

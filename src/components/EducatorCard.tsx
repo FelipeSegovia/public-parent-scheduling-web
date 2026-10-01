@@ -1,6 +1,6 @@
 export function EducatorCard() {
   return (
-    <aside className="flex items-center gap-3 rounded-2xl border border-border bg-card px-4 py-3 shadow-sm">
+    <aside className="flex items-center gap-3 self-start rounded-xl border border-border bg-card px-4 py-3 lg:self-end">
       <div className="relative">
         <div className="flex size-12 items-center justify-center rounded-full bg-brand-selected font-medium text-primary">
           LC

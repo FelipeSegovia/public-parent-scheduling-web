@@ -10,7 +10,14 @@ import {
 import { formatInTimeZone, fromZonedTime, toZonedTime } from 'date-fns-tz'
 import { TIMEZONE, type Session, type SlotView } from './types'
 
-/** Mon–Fri: 19:00, 20:00. Sat: 9:00, 10:00, 11:00. Sun: none. */
+/**
+ * Plantilla inicial fija, solo para el mock (`src/mocks/db.ts`), igual que
+ * `buildSlotsForWeek` e `initialSessionStatus` (plazo fijo de 24 h). Con el
+ * backend real la plantilla y el plazo los edita la educadora y llegan ya
+ * resueltos en `GET /api/slots` y en el estado de la sesión.
+ *
+ * Mon–Fri: 19:00, 20:00. Sat: 9:00, 10:00, 11:00. Sun: none.
+ */
 const WEEKDAY_TIMES = ['19:00', '20:00'] as const
 const SATURDAY_TIMES = ['09:00', '10:00', '11:00'] as const
 
@@ -274,20 +281,4 @@ export function isPastSlot(startsAtIso: string, now = new Date()): boolean {
 
 export function shiftWeek(mondayYmd: string, weeks: number): string {
   return format(addDays(parseYmdAsLocalParts(mondayYmd), weeks * 7), 'yyyy-MM-dd')
-}
-
-/** Find next week (after mondayYmd) that has at least one free future slot. */
-export function findNextWeekWithAvailability(
-  mondayYmd: string,
-  sessions: Session[],
-  maxWeeks = 12,
-): string | null {
-  for (let i = 1; i <= maxWeeks; i++) {
-    const weekStart = shiftWeek(mondayYmd, i)
-    const slots = buildSlotsForWeek(weekStart, sessions)
-    if (slots.some((s) => s.available && !isPastSlot(s.startsAt))) {
-      return weekStart
-    }
-  }
-  return null
 }

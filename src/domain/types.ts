@@ -52,10 +52,24 @@ export type CreateBookingInput = {
   childName: string
   childAge: number
   helpRequest?: string
+  /** Crea la cuenta del apoderado en el mismo envío que la reserva. */
+  createAccount?: { password: string }
+}
+
+export type GuardianProfile = {
+  guardian: Guardian
+  children: Child[]
+}
+
+export type AuthResult = {
+  token: string
+  profile: GuardianProfile
 }
 
 export type BookingResult = {
   session: Session
   guardian: Guardian
   child: Child
+  /** Presente cuando la reserva también creó la cuenta. */
+  auth?: AuthResult
 }
