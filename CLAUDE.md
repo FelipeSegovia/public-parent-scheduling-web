@@ -77,4 +77,5 @@ Cuenta sembrada en `src/mocks/db.ts` (`ejemplo@correo.cl`, clave en `SEED_PASSWO
 ## Specs
 
 - `.specs/001-cuenta-apoderado/`: cuenta opcional. Completada (ver `status.md`, incluye límites conocidos del mock de auth).
-- La siguiente feature usa `002-`.
+- `.specs/002-rediseno-reserva/`: rediseño visual de la página de reserva, sin cambios de flujo (ver `status.md`).
+- La siguiente feature usa `003-`.

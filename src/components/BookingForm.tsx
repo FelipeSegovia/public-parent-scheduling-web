@@ -8,14 +8,7 @@ import {
   type ReactElement,
   type ReactNode,
 } from 'react'
-import {
-  HiOutlineCalendar,
-  HiOutlineEnvelope,
-  HiOutlineLockClosed,
-  HiOutlinePhone,
-  HiOutlineUser,
-  HiOutlineUserCircle,
-} from 'react-icons/hi2'
+import { HiOutlineCalendar } from 'react-icons/hi2'
 import { ApiError, emailHasAccount } from '@/api/client'
 import { getPasswordErrors, PASSWORD_MIN_LENGTH } from '@/domain/auth'
 import {
@@ -232,12 +225,12 @@ export function BookingForm({
       )}
 
       {selectedStartsAt ? (
-        <div className="flex items-center justify-between gap-3 rounded-xl bg-brand-soft px-4 py-3">
+        <div className="flex items-center justify-between gap-3 rounded-2xl bg-primary px-4 py-3.5 text-primary-foreground">
           <div className="flex min-w-0 items-center gap-3">
-            <HiOutlineCalendar className="size-5 shrink-0 text-primary" />
+            <HiOutlineCalendar className="size-[1.375rem] shrink-0" aria-hidden />
             <div className="min-w-0 text-left">
-              <p className="text-xs text-muted-foreground">Tu sesión</p>
-              <p className="truncate font-medium capitalize">
+              <p className="text-xs opacity-85">Tu sesión</p>
+              <p className="truncate font-semibold capitalize">
                 {formatSessionSummary(selectedStartsAt)}
               </p>
             </div>
@@ -245,7 +238,7 @@ export function BookingForm({
           <button
             type="button"
             onClick={onChangeSlot}
-            className="shrink-0 text-sm font-medium text-primary underline-offset-2 hover:underline"
+            className="min-h-11 shrink-0 rounded-full border border-primary-foreground/50 px-4 text-sm font-medium transition-colors hover:bg-primary-foreground/10 focus-visible:outline-primary-foreground"
           >
             Cambiar
           </button>
@@ -254,10 +247,11 @@ export function BookingForm({
         <div className="space-y-2">
           <div
             className={cn(
-              'rounded-xl border border-dashed px-4 py-3 text-sm text-muted-foreground',
-              fieldErrors.slot ? 'border-destructive/50' : 'border-border',
+              'flex items-center gap-3 rounded-2xl border border-dashed px-4 py-3.5 text-left text-sm text-muted-foreground',
+              fieldErrors.slot ? 'border-destructive/50' : 'border-brand-selected',
             )}
           >
+            <HiOutlineCalendar className="size-5 shrink-0 text-primary" aria-hidden />
             Selecciona un horario en el paso 1 para continuar.
           </div>
           {fieldErrors.slot ? (
@@ -271,7 +265,6 @@ export function BookingForm({
         label="Tu nombre"
         required
         error={fieldErrors.guardianName}
-        icon={<HiOutlineUser className="size-4" />}
       >
         <Input
           id="guardianName"
@@ -281,32 +274,52 @@ export function BookingForm({
           placeholder="Ej. Camila González"
           value={values.guardianName}
           onChange={(e) => update('guardianName', e.target.value)}
-          className="h-11 rounded-xl pl-9"
+          className="h-11 rounded-xl"
         />
       </Field>
 
-      <Field
-        id="email"
-        label="Correo electrónico"
-        required
-        error={fieldErrors.email}
-        hint={signedIn ? 'Es el correo de tu cuenta.' : undefined}
-        icon={<HiOutlineEnvelope className="size-4" />}
-      >
-        <Input
+      <div className="grid items-start gap-5 sm:grid-cols-2">
+        <Field
           id="email"
-          type="email"
+          label="Correo electrónico"
           required
-          disabled={disabled}
-          readOnly={signedIn}
-          autoComplete="email"
-          placeholder="nombre@correo.cl"
-          value={values.email}
-          onChange={(e) => update('email', e.target.value)}
-          onBlur={() => void checkEmail()}
-          className={cn('h-11 rounded-xl pl-9', signedIn && 'bg-muted/60')}
-        />
-      </Field>
+          error={fieldErrors.email}
+          hint={signedIn ? 'Es el correo de tu cuenta.' : undefined}
+        >
+          <Input
+            id="email"
+            type="email"
+            required
+            disabled={disabled}
+            readOnly={signedIn}
+            autoComplete="email"
+            placeholder="nombre@correo.cl"
+            value={values.email}
+            onChange={(e) => update('email', e.target.value)}
+            onBlur={() => void checkEmail()}
+            className={cn('h-11 rounded-xl', signedIn && 'bg-muted/60')}
+          />
+        </Field>
+
+        <Field
+          id="phone"
+          label="Teléfono"
+          required
+          error={fieldErrors.phone}
+        >
+          <Input
+            id="phone"
+            type="tel"
+            required
+            disabled={disabled}
+            autoComplete="tel"
+            placeholder="+56 9 1234 5678"
+            value={values.phone}
+            onChange={(e) => update('phone', e.target.value)}
+            className="h-11 rounded-xl"
+          />
+        </Field>
+      </div>
 
       {emailHasSavedAccount ? (
         <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2 rounded-xl bg-brand-soft px-4 py-3 text-sm">
@@ -323,115 +336,99 @@ export function BookingForm({
         </div>
       ) : null}
 
-      <Field
-        id="phone"
-        label="Teléfono"
-        required
-        error={fieldErrors.phone}
-        icon={<HiOutlinePhone className="size-4" />}
-      >
-        <Input
-          id="phone"
-          type="tel"
-          required
-          disabled={disabled}
-          autoComplete="tel"
-          placeholder="+56 9 1234 5678"
-          value={values.phone}
-          onChange={(e) => update('phone', e.target.value)}
-          className="h-11 rounded-xl pl-9"
-        />
-      </Field>
-
-      {signedIn && profile.children.length > 1 ? (
-        <ChildPicker
-          saved={profile.children}
-          childName={values.childName}
-          onPick={pickChild}
-        />
-      ) : null}
-
-      <div className="grid gap-5 sm:grid-cols-[1fr_9rem]">
-        <Field
-          id="childName"
-          label="Nombre del niño o niña"
-          required
-          error={fieldErrors.childName}
-          icon={<HiOutlineUserCircle className="size-4" />}
-        >
-          <Input
-            ref={childNameRef}
-            id="childName"
-            required
-            disabled={disabled}
-            placeholder="Ej. Mateo"
-            value={values.childName}
-            onChange={(e) => update('childName', e.target.value)}
-            className="h-11 rounded-xl pl-9"
+      <fieldset className="space-y-5 rounded-2xl border border-border p-4 text-left sm:p-5">
+        <legend className="mb-0 px-1.5 text-sm font-semibold text-primary">
+          Sobre tu hijo o hija
+        </legend>
+        {signedIn && profile.children.length > 1 ? (
+          <ChildPicker
+            saved={profile.children}
+            childName={values.childName}
+            onPick={pickChild}
           />
-        </Field>
+        ) : null}
+
+        <div className="grid gap-5 sm:grid-cols-[1fr_9rem]">
+          <Field
+            id="childName"
+            label="Nombre del niño o niña"
+            required
+            error={fieldErrors.childName}
+          >
+            <Input
+              ref={childNameRef}
+              id="childName"
+              required
+              disabled={disabled}
+              placeholder="Ej. Mateo"
+              value={values.childName}
+              onChange={(e) => update('childName', e.target.value)}
+              className="h-11 rounded-xl"
+            />
+          </Field>
+
+          <div className="space-y-2 text-left">
+            <RequiredLabel htmlFor="childAge">Edad (3 a 13)</RequiredLabel>
+            <Input
+              id="childAge"
+              type="number"
+              inputMode="numeric"
+              min={3}
+              max={13}
+              required
+              aria-required
+              disabled={disabled}
+              placeholder="Ej. 7"
+              value={values.childAge}
+              onChange={(e) => update('childAge', e.target.value)}
+              aria-invalid={fieldErrors.childAge ? true : undefined}
+              aria-describedby={
+                fieldErrors.childAge ? 'childAge-error' : undefined
+              }
+              className="h-11 rounded-xl tabular-nums"
+            />
+            {fieldErrors.childAge ? (
+              <FieldMessage id="childAge-error">{fieldErrors.childAge}</FieldMessage>
+            ) : null}
+          </div>
+        </div>
 
         <div className="space-y-2 text-left">
-          <RequiredLabel htmlFor="childAge">Edad (3 a 13)</RequiredLabel>
-          <Input
-            id="childAge"
-            type="number"
-            inputMode="numeric"
-            min={3}
-            max={13}
-            required
-            aria-required
+          <Label htmlFor="helpRequest">
+            ¿En qué te gustaría que te ayude la educadora?
+          </Label>
+          <textarea
+            id="helpRequest"
             disabled={disabled}
-            placeholder="Ej. 7"
-            value={values.childAge}
-            onChange={(e) => update('childAge', e.target.value)}
-            aria-invalid={fieldErrors.childAge ? true : undefined}
+            rows={4}
+            maxLength={HELP_REQUEST_MAX_LENGTH}
+            placeholder="Ej. dificultades con la lectura, organización del estudio, conducta en el colegio…"
+            value={values.helpRequest}
+            onChange={(e) => update('helpRequest', e.target.value)}
+            aria-invalid={fieldErrors.helpRequest ? true : undefined}
             aria-describedby={
-              fieldErrors.childAge ? 'childAge-error' : undefined
+              fieldErrors.helpRequest ? 'helpRequest-error' : 'helpRequest-hint'
             }
-            className="h-11 rounded-xl tabular-nums"
+            className={cn(
+              'w-full min-w-0 resize-y rounded-xl border border-input bg-transparent px-3 py-2.5 text-base transition-colors outline-none placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 disabled:pointer-events-none disabled:cursor-not-allowed disabled:bg-input/50 disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 md:text-sm',
+            )}
           />
-          {fieldErrors.childAge ? (
-            <FieldMessage id="childAge-error">{fieldErrors.childAge}</FieldMessage>
-          ) : null}
-        </div>
-      </div>
-
-      <div className="space-y-2 text-left">
-        <Label htmlFor="helpRequest">
-          ¿En qué te gustaría que te ayude la educadora?
-        </Label>
-        <textarea
-          id="helpRequest"
-          disabled={disabled}
-          rows={4}
-          maxLength={HELP_REQUEST_MAX_LENGTH}
-          placeholder="Ej. dificultades con la lectura, organización del estudio, conducta en el colegio…"
-          value={values.helpRequest}
-          onChange={(e) => update('helpRequest', e.target.value)}
-          aria-invalid={fieldErrors.helpRequest ? true : undefined}
-          aria-describedby={
-            fieldErrors.helpRequest ? 'helpRequest-error' : 'helpRequest-hint'
-          }
-          className={cn(
-            'w-full min-w-0 resize-y rounded-xl border border-input bg-transparent px-3 py-2.5 text-base transition-colors outline-none placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 disabled:pointer-events-none disabled:cursor-not-allowed disabled:bg-input/50 disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 md:text-sm',
+          {fieldErrors.helpRequest ? (
+            <FieldMessage id="helpRequest-error">
+              {fieldErrors.helpRequest}
+            </FieldMessage>
+          ) : (
+            <p id="helpRequest-hint" className="text-xs text-muted-foreground">
+              Opcional. Nos ayuda a preparar mejor la sesión (máx.{' '}
+              {HELP_REQUEST_MAX_LENGTH} caracteres).
+            </p>
           )}
-        />
-        {fieldErrors.helpRequest ? (
-          <FieldMessage id="helpRequest-error">
-            {fieldErrors.helpRequest}
-          </FieldMessage>
-        ) : (
-          <p id="helpRequest-hint" className="text-xs text-muted-foreground">
-            Opcional. Nos ayuda a preparar mejor la sesión (máx.{' '}
-            {HELP_REQUEST_MAX_LENGTH} caracteres).
-          </p>
-        )}
-      </div>
+        </div>
+      </fieldset>
 
       {!signedIn && !emailHasSavedAccount ? (
-        <div className="space-y-4 border-t border-border pt-5">
-          <label className="flex cursor-pointer items-start gap-3 text-left">
+        <div className="space-y-4">
+          <label className="flex cursor-pointer items-start gap-3 rounded-xl bg-brand-soft p-4 text-left">
             <input
               type="checkbox"
               checked={values.createAccount}
@@ -462,7 +459,6 @@ export function BookingForm({
                     ? undefined
                     : `Al menos ${PASSWORD_MIN_LENGTH} caracteres.`
                 }
-                icon={<HiOutlineLockClosed className="size-4" />}
               >
                 <Input
                   id="password"
@@ -471,7 +467,7 @@ export function BookingForm({
                   disabled={disabled}
                   value={values.password}
                   onChange={(e) => update('password', e.target.value)}
-                  className="h-11 rounded-xl pl-9"
+                  className="h-11 rounded-xl"
                 />
               </Field>
               <Field
@@ -479,7 +475,6 @@ export function BookingForm({
                 label="Repite la clave"
                 required
                 error={fieldErrors.passwordConfirm}
-                icon={<HiOutlineLockClosed className="size-4" />}
               >
                 <Input
                   id="passwordConfirm"
@@ -488,7 +483,7 @@ export function BookingForm({
                   disabled={disabled}
                   value={values.passwordConfirm}
                   onChange={(e) => update('passwordConfirm', e.target.value)}
-                  className="h-11 rounded-xl pl-9"
+                  className="h-11 rounded-xl"
                 />
               </Field>
             </div>
@@ -537,7 +532,6 @@ function Field({
   required,
   error,
   hint,
-  icon,
   children,
 }: {
   id: string
@@ -545,7 +539,6 @@ function Field({
   required?: boolean
   error?: string
   hint?: string
-  icon: ReactNode
   children: ReactNode
 }) {
   const messageId = error ? `${id}-error` : hint ? `${id}-hint` : undefined
@@ -564,12 +557,7 @@ function Field({
       ) : (
         <Label htmlFor={id}>{label}</Label>
       )}
-      <div className="relative">
-        <span className="pointer-events-none absolute top-1/2 left-3 -translate-y-1/2 text-muted-foreground">
-          {icon}
-        </span>
-        {control}
-      </div>
+      {control}
       {error ? (
         <FieldMessage id={messageId}>{error}</FieldMessage>
       ) : hint ? (

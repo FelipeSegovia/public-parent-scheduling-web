@@ -1,19 +1,38 @@
+import type { IconType } from 'react-icons'
+import {
+  HiOutlineClock,
+  HiOutlineGlobeAmericas,
+  HiOutlineUser,
+} from 'react-icons/hi2'
+
+const facts: { icon: IconType; text: string }[] = [
+  { icon: HiOutlineClock, text: 'Sesiones presenciales de 1 hora' },
+  { icon: HiOutlineUser, text: 'Niños y niñas de 3 a 13 años' },
+  { icon: HiOutlineGlobeAmericas, text: 'Horarios en hora de Chile' },
+]
+
 export function EducatorCard() {
   return (
-    <aside className="flex items-center gap-3 self-start rounded-xl border border-border bg-card px-4 py-3 lg:self-end">
-      <div className="relative">
-        <div className="flex size-12 items-center justify-center rounded-full bg-brand-selected font-medium text-primary">
+    <aside className="flex w-full flex-col gap-5 rounded-2xl border border-border bg-card p-6 text-left lg:w-80">
+      <div className="flex items-center gap-4">
+        <div className="flex size-[4.5rem] shrink-0 items-center justify-center rounded-full bg-brand-selected font-heading text-3xl text-primary">
           LC
         </div>
-        <span
-          className="absolute right-0 bottom-0 size-3 rounded-full border-2 border-card bg-emerald-500"
-          aria-label="Disponible"
-        />
+        <div className="min-w-0">
+          <p className="font-heading text-2xl leading-tight text-foreground">
+            Loreto Castillo
+          </p>
+          <p className="text-muted-foreground">Educadora diferencial</p>
+        </div>
       </div>
-      <div className="min-w-0 text-left">
-        <p className="font-medium text-foreground">Loreto Castillo</p>
-        <p className="text-sm text-muted-foreground">Educadora diferencial</p>
-      </div>
+      <ul className="space-y-3 border-t border-border pt-4 text-[0.9375rem]">
+        {facts.map(({ icon: Icon, text }) => (
+          <li key={text} className="flex items-center gap-2.5">
+            <Icon className="size-[1.125rem] shrink-0 text-primary" aria-hidden />
+            {text}
+          </li>
+        ))}
+      </ul>
     </aside>
   )
 }

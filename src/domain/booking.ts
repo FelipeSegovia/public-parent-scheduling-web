@@ -240,6 +240,25 @@ export function formatDayChip(dateYmd: string): {
   }
 }
 
+/** «martes 6 de octubre», para etiquetas accesibles. */
+export function formatDayLong(dateYmd: string): string {
+  return new Intl.DateTimeFormat('es-CL', {
+    timeZone: TIMEZONE,
+    weekday: 'long',
+    day: 'numeric',
+    month: 'long',
+  })
+    .format(fromZonedTime(`${dateYmd}T12:00:00`, TIMEZONE))
+    .replace(',', '')
+}
+
+/** «19:00 – 20:00». Las sesiones duran 1 hora fija. */
+export function slotRangeLabel(timeHm: string): string {
+  const [h, m] = timeHm.split(':').map(Number)
+  const end = `${String((h + 1) % 24).padStart(2, '0')}:${String(m).padStart(2, '0')}`
+  return `${timeHm} – ${end}`
+}
+
 export function monthRangeLabel(mondayYmd: string): string {
   const days = weekDaysMonSatYmd(mondayYmd)
   const first = days[0]

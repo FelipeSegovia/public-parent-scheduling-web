@@ -23,7 +23,7 @@ Reserva privada de una sola sesión, sin cuenta obligatoria. El cupo se bloquea 
 ## Operating Context
 
 - Idioma de la interfaz: español. Zona horaria: `America/Santiago`.
-- La sesión dura 1 hora. La plantilla inicial, editable por la educadora en su panel, es lunes a viernes a las 19:00 y 20:00, y sábado a las 9:00, 10:00 y 11:00. Esta superficie solo muestra los cupos que siguen libres.
+- La sesión es presencial y dura 1 hora. La plantilla inicial, editable por la educadora en su panel, es lunes a viernes a las 19:00 y 20:00, y sábado a las 9:00, 10:00 y 11:00. Esta superficie solo muestra los cupos que siguen libres.
 - El canal del apoderado es el correo: alta de la cita, confirmación, cancelación, reprogramación hecha por la educadora y liberación por falta de confirmación. En local, la pantalla de resultado simula los enlaces Confirmo y No puedo.
 - El plazo inicial para confirmar es 24 horas antes de la cita. Si al reservar ese plazo ya venció (incluye el mismo día), la sesión nace confirmada.
 - Rutas de esta superficie: `/` (elegir cupo y datos), `/reserva/:id` (resultado), `/sesion/:token/confirmar`, `/sesion/:token/cancelar` y `/cuenta/restablecer/:token` (clave nueva).

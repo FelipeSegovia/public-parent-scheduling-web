@@ -12,6 +12,8 @@ import {
 import { useAuth } from '@/auth/auth-context'
 import { SiteHeader } from '@/components/SiteHeader'
 import { EducatorCard } from '@/components/EducatorCard'
+import { HowItWorks } from '@/components/HowItWorks'
+import { SiteFooter } from '@/components/SiteFooter'
 import { DateStrip } from '@/components/DateStrip'
 import { TimeSlotList } from '@/components/TimeSlotList'
 import { BookingForm, type BookingFormValues } from '@/components/BookingForm'
@@ -44,6 +46,8 @@ export function BookingPage() {
         date,
         hasSlots: daySlots.some((s) => !s.past),
         hasAvailable: daySlots.some((s) => s.available),
+        freeCount: daySlots.filter((s) => s.available).length,
+        allPast: daySlots.length > 0 && daySlots.every((s) => s.past),
       }
     })
   }, [weekStart, slots])
@@ -123,8 +127,11 @@ export function BookingPage() {
     <div className="mx-auto max-w-6xl px-4 pb-16 sm:px-6">
       <SiteHeader />
 
-      <section className="relative mt-4 mb-12 grid gap-8 lg:grid-cols-[1fr_auto] lg:items-end">
+      <section className="relative mt-4 mb-10 grid gap-8 lg:grid-cols-[1fr_auto] lg:items-center">
         <div className="max-w-xl text-left">
+          <p className="mb-4 text-sm font-semibold text-primary">
+            Sesiones de apoyo con Loreto Castillo
+          </p>
           <h1 className="font-heading text-4xl leading-[1.08] tracking-[-0.02em] text-balance text-foreground sm:text-[3.25rem]">
             Agenda una sesión para{' '}
             <em className="text-primary italic">acompañar</em> su proceso.
@@ -137,8 +144,10 @@ export function BookingPage() {
         <EducatorCard />
       </section>
 
+      <HowItWorks />
+
       <div className="grid items-start gap-6 lg:grid-cols-2">
-        <section className="rounded-xl bg-card p-6 shadow-[0_12px_40px_-24px_rgb(74_36_48/0.35)] sm:p-8">
+        <section className="rounded-2xl bg-card p-6 shadow-[0_12px_40px_-24px_rgb(74_36_48/0.35)] sm:p-8">
           <StepHeading step={1}>Elige un horario</StepHeading>
 
           <DateStrip
@@ -182,7 +191,7 @@ export function BookingPage() {
           </div>
         </section>
 
-        <section className="rounded-xl bg-card p-6 shadow-[0_12px_40px_-24px_rgb(74_36_48/0.35)] sm:p-8">
+        <section className="rounded-2xl bg-card p-6 shadow-[0_12px_40px_-24px_rgb(74_36_48/0.35)] sm:p-8">
           <StepHeading step={2}>Cuéntanos sobre ustedes</StepHeading>
 
           <BookingForm
@@ -197,6 +206,8 @@ export function BookingPage() {
           />
         </section>
       </div>
+
+      <SiteFooter />
     </div>
   )
 }
