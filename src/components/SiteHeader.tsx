@@ -13,7 +13,7 @@ export function SiteHeader() {
     <header className="flex items-center justify-between gap-4 px-1 py-6">
       <Link to="/" className="flex items-center gap-2.5 text-primary no-underline">
         <img src={logoIcon} alt="" className="size-9" />
-        <span className="font-heading text-2xl tracking-tight">Acompaña</span>
+        <span className="font-heading text-2xl tracking-tight">Pequeños pasos</span>
       </Link>
 
       {profile === undefined ? null : profile ? (

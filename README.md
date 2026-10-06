@@ -1,8 +1,8 @@
-# Acompaña — Reserva pública para apoderados
+# Pequeños pasos — Reserva pública para apoderados
 
 Superficie web pública del MVP de agendamiento. Permite a un apoderado ver cupos libres y reservar **una sesión** con una educadora diferencial. La cuenta es opcional: sirve solo para no volver a escribir los datos.
 
-Marca del producto: **Acompaña**. Zona horaria: `America/Santiago`.
+Marca del producto: **Pequeños pasos**. Zona horaria: `America/Santiago`.
 
 ## Para quién es
 

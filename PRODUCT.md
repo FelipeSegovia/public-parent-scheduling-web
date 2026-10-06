@@ -51,7 +51,7 @@ No entra aquí, y no debe colarse en trabajo futuro de esta superficie:
 
 ## Brand Commitments
 
-- Nombre: **Acompaña**.
+- Nombre: **Pequeños pasos**.
 - La voz ya presente en la interfaz es cercana y directa, en español, y insiste en que reservar no exige una cuenta. Ejemplo vigente: «Espacio de apoyo para tu familia» y «Puedes reservar sin cuenta».
 
 ## Evidence on Hand

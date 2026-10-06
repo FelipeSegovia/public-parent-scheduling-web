@@ -11,7 +11,7 @@ export function SiteFooter() {
         Tus datos solo los ve Loreto. Nunca mostramos información de otras
         familias.
       </p>
-      <p>Acompaña · Loreto Castillo, educadora diferencial</p>
+      <p>Pequeños pasos · Loreto Castillo, educadora diferencial</p>
     </footer>
   )
 }
